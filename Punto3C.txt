@@ -1,0 +1,16 @@
+Esta consulta utiliza una subconsulta para obtener los encargados que han sido asignados a una sala y luego elimina los encargados que no están presentes en esa lista.
+
+Explicación:
+
+La subconsulta (SELECT tipoDocEncargado, NroDocumentoEncargado FROM SALA) obtiene los pares de tipo de documento y número de documento de los encargados asignados a una sala.
+La cláusula NOT IN verifica si los pares de tipo de documento y número de documento del encargado no están presentes en la lista obtenida por la subconsulta.
+La cláusula DELETE FROM ENCARGADO elimina los registros de la tabla ENCARGADO que cumplen con la condición especificada.
+En resumen, esta consulta eliminará los encargados que no han sido asignados a ninguna sala, dejando solo aquellos encargados que han sido responsables de alguna sala en la base de datos del cine.
+
+la cláusula NOT IN se utiliza para realizar una comparación de desigualdad en SQL. Se utiliza para encontrar los encargados que no han sido asignados a ninguna sala.
+
+DELETE FROM ENCARGADO
+WHERE (tipoDoc, NroDocumento) NOT IN (
+    SELECT tipoDocEncargado, NroDocumentoEncargado
+    FROM SALA
+);

@@ -1,0 +1,5 @@
+Esta sentencia SQL actualiza el campo Hora en la tabla FUNCION y establece el valor de '20:00' para todas las filas donde la fecha sea igual a '2022-06-24'.
+
+UPDATE FUNCION
+SET Hora = '20:00'
+WHERE Fecha = '2022-06-24';

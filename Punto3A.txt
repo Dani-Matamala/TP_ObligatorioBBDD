@@ -1,0 +1,4 @@
+Este sentencia SQL inserta dentro de la tabla ENCARGADO un nuevo dato con los valores correspondientes a VALUES haciendo referencia a los atributos segun su orden.
+
+INSERT INTO ENCARGADO (tipoDoc, NroDocumento, legajo, categoria)
+VALUES ('DNI, 12345678, 'CINE-1223', 'Supervisor');
