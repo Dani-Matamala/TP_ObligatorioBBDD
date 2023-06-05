@@ -1,0 +1,20 @@
+Listar la cantidad de funciones por cada publicidad inicial en lo que va de este año 2022. Listar idPubliciad, Duración y cantidad
+
+SELECT p.id AS idPublicidad, p.Duracion, COUNT(f.idPublicidadInicio) AS cantidad
+FROM PUBLICIDAD p
+JOIN FUNCION f ON p.id = f.idPublicidadInicio
+WHERE YEAR(f.Fecha) = 2022
+GROUP BY p.id, p.Duracion;
+
+Explicacion de la consulta:
+La consulta comienza seleccionando las columnas que queremos mostrar en el resultado final: p.id (que renombramos como idPublicidad), p.Duracion y la cuenta de f.idPublicidadInicio (que renombramos como cantidad). Estas columnas representarán el identificador de la publicidad, su duración y la cantidad de funciones asociadas a esa publicidad.
+
+Luego, utilizamos la cláusula FROM para indicar de qué tablas estamos obteniendo los datos. En este caso, usamos PUBLICIDAD como p y FUNCION como f. Así, podemos referirnos a las columnas de cada tabla utilizando los alias (p y f).
+
+A continuación, utilizamos la cláusula JOIN para combinar las filas de ambas tablas en base a una condición. En este caso, la condición es p.id = f.idPublicidadInicio, lo que significa que queremos obtener las filas donde el identificador de la publicidad sea igual al identificador de la publicidad inicial en la tabla de funciones.
+
+Después, utilizamos la cláusula WHERE para filtrar los resultados. Queremos obtener solo las funciones del año 2022, por lo que comparamos el año de la columna f.Fecha utilizando la función YEAR(f.Fecha) y la condición = 2022.
+
+Por último, utilizamos la cláusula GROUP BY para agrupar los resultados por el identificador de la publicidad (p.id) y su duración (p.Duracion). Esto nos permite contar la cantidad de funciones por cada combinación única de identificador y duración de la publicidad.
+
+En resumen, esta consulta nos dará la cantidad de funciones por cada publicidad inicial en el año 2022, mostrando el identificador de la publicidad, su duración y la cantidad de funciones asociadas a ella.

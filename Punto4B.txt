@@ -1,0 +1,25 @@
+Seleccionar los asientos de las salas tipo ‘3D’, que nunca han sido vendidos en Entradas. Listar idSala, NroAsiento, fila. Utilizar Not Exists
+
+
+SELECT idSala, nroAsiento, fila
+FROM ASIENTO a
+WHERE a.idSala IN (
+    SELECT s.idSala
+    FROM SALA s
+    WHERE s.tipo = '3D'
+)
+AND NOT EXISTS (
+    SELECT 1
+    FROM ENTRADA e
+    WHERE e.idSala = a.idSala
+    AND e.NroAsiento = a.nroAsiento
+);
+
+
+Explicación de la consulta:
+
+-En la subconsulta interna, se seleccionan las idSala de las salas que tienen el tipo '3D'.
+-En la consulta principal, se seleccionan los asientos de las salas que coinciden con los idSala obtenidos en la subconsulta interna.
+-La cláusula NOT EXISTS se utiliza para verificar que no exista ninguna entrada vendida en esa sala y asiento específico.
+-Solo se seleccionan los campos idSala, nroAsiento y fila de la tabla ASIENTO.
+Esta consulta devolverá los asientos de las salas tipo '3D' que nunca han sido vendidos en entradas.

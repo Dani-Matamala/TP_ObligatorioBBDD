@@ -1,0 +1,28 @@
+Listar la cantidad de entradas emitidas por fecha que correspondan a funciones del mes de Mayo de 2022 y además la publicidad final debe ser de 5 minutos. Listar fecha de emisión y cantidad. Utilice el operador IN para determinar la publicidad final.
+
+SELECT fechaEmision, COUNT(*) AS cantidad
+FROM ENTRADA
+WHERE MONTH(fechaEmision) = 5
+    AND YEAR(fechaEmision) = 2022
+    AND idFuncion IN (
+        SELECT IdFuncion
+        FROM FUNCION
+        WHERE MONTH(Fecha) = 5
+            AND YEAR(Fecha) = 2022
+            AND idPublicidadFinal IN (
+                SELECT id
+                FROM PUBLICIDAD
+                WHERE Duracion = 5
+            )
+    )
+GROUP BY fechaEmision;
+
+Comenzamos seleccionando la columna fechaEmision y utilizamos la función de agregación COUNT(*) para contar la cantidad de registros en cada grupo de fecha.
+
+En la cláusula WHERE, establecemos las condiciones para filtrar los resultados. Utilizamos las funciones MONTH() y YEAR() para extraer el mes y el año de la fecha de emisión y la fecha de la función. Queremos que el mes sea mayo y el año sea 2022.
+
+Para verificar que la función tenga una publicidad final de 5 minutos, utilizamos el operador IN. En la subconsulta, seleccionamos los identificadores de las funciones que cumplen las condiciones de mes y año especificadas y que tienen una publicidad final cuyo identificador se encuentra en la subconsulta interna, donde seleccionamos los identificadores de las publicidades con duración de 5 minutos.
+
+Finalmente, agrupamos los resultados por la columna fechaEmision utilizando la cláusula GROUP BY.
+
+De esta manera, obtendremos la cantidad de entradas emitidas por fecha para las funciones del mes de mayo de 2022, donde la publicidad final tiene una duración de 5 minutos. Los resultados mostrarán la fecha de emisión y la cantidad correspondiente.

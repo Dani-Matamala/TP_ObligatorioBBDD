@@ -1,0 +1,13 @@
+Esta consulta utiliza la función DATE_SUB() para restar 2 días a la fecha de la función y luego compara esa fecha resultante con la columna fechaEmision de la tabla ENTRADA. Devolverá las entradas que cumplan con esa condición y seleccionará los campos solicitados.
+
+//JOIN explicito, mediante la cláusula JOIN
+SELECT e.NumeroEntrada, e.NroAsiento, e.IdSala, e.IdFuncion
+FROM ENTRADA e
+JOIN FUNCION f ON e.idFuncion = f.IdFuncion
+WHERE e.fechaEmision = DATE_SUB(f.Fecha, INTERVAL 2 DAY);
+
+//Join implicito, mediante la clausula WHERE
+SELECT e.NumeroEntrada, e.NroAsiento, e.IdSala, e.IdFuncion
+FROM ENTRADA e, FUNCION f
+WHERE e.idFuncion = f.IdFuncion AND e.fechaEmision = DATE_SUB(f.Fecha, INTERVAL 2 DAY);
+
